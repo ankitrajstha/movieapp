@@ -6,47 +6,27 @@ const BannerHome = () => {
   const bannerData = useSelector((state) => state.movieoData.bannerData);
   const imageURL = useSelector((state) => state.movieoData.imageURL);
   const [currentImage, setCurrentImage] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
 
   const handleNext = () => {
     setCurrentImage((prev) => (prev + 1) % bannerData.length);
   };
 
   const handlePrevious = () => {
-    setCurrentImage((prev) => (prev - 1 + bannerData.length) % bannerData.length);
+    setCurrentImage(
+      (prev) => (prev - 1 + bannerData.length) % bannerData.length
+    );
   };
 
   useEffect(() => {
-    let interval = null;
-    
-    const startTimer = () => {
-      interval = setInterval(() => {
-        if (!isHovered) {
-          handleNext();
-        }
-      }, 3000); // Adjust the interval as per your requirement
-    };
-
-    startTimer(); // Start timer initially
-
+    const interval = setInterval(() => {
+      handleNext();
+    }, 3000);
     return () => clearInterval(interval);
-  }, [bannerData, isHovered]);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
+  }, [bannerData]);
 
   return (
     <section className="w-full h-full">
-      <div
-        className="flex min-h-full max-h-[95vh] overflow-hidden"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
+      <div className="flex min-h-full max-h-[95vh] overflow-hidden">
         {bannerData.map((data, index) => (
           <div
             key={index}
