@@ -5,10 +5,12 @@ import Footer from "./components/Footer";
 
 export default function App() {
   return (
-    <main>
+    <>
       <Header />
-      <Outlet />
+      <main className="pt-16">
+        <Outlet />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }
