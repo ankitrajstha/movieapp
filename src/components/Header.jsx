@@ -19,7 +19,7 @@ const Header = () => {
     e.preventDefault();
   };
   return (
-    <header className="fixed top-0 w-full h-16 bg-neutral-600 bg-opacity-75">
+    <header className="fixed top-0 w-full h-16 bg-neutral-600 bg-opacity-75 z-50">
       <div className="container mx-auto px-2 flex items-center h-full">
         <Link to={"/"}>
           <img src={logo} alt="logo" width={120} />
