@@ -20,10 +20,26 @@ const Home = () => {
         heading={"Trending Shows"}
         trending={true}
       />
-      <HorizontalScrollCard data={nowPlayingData} heading={"Now Showing"} />
-      <HorizontalScrollCard data={topRatedMoviesData} heading={"Top Rated"} />
-      <HorizontalScrollCard data={popularMoviesData} heading={"Popular"} />
-      <HorizontalScrollCard data={upcomingData} heading={"Upcoming"} />
+      <HorizontalScrollCard
+        data={nowPlayingData}
+        heading={"Now Showing"}
+        media_type={"movie"}
+      />
+      <HorizontalScrollCard
+        data={topRatedMoviesData}
+        heading={"Top Rated"}
+        media_type={"movie"}
+      />
+      <HorizontalScrollCard
+        data={popularMoviesData}
+        heading={"Popular"}
+        media_type={"movie"}
+      />
+      <HorizontalScrollCard
+        data={upcomingData}
+        heading={"Upcoming"}
+        media_type={"movie"}
+      />
     </div>
   );
 };

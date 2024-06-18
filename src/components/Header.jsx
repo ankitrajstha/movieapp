@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import logo from "../assets/logo.png";
 import userIcon from "../assets/user.png";
 import { IoSearchOutline } from "react-icons/io5";
 import { navigation } from "../constants/navigation";
 
 const Header = () => {
-  const [search, setSearch] = useState("");
+  const location = useLocation();
+  const removeSpace = location?.search?.slice(3)?.split("%20")?.join(" ");
+  const [search, setSearch] = useState(removeSpace);
   const navigate = useNavigate();
 
   useEffect(() => {

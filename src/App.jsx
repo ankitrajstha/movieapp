@@ -36,7 +36,7 @@ export default function App() {
     <>
       <div className="pb-14 lg:pb-0">
         <Header />
-        <main>
+        <main className="min-h-[90vh]">
           <Outlet />
         </main>
         <Footer />

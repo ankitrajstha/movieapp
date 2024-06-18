@@ -16,7 +16,6 @@ const ExplorePage = () => {
           page: pageNo,
         },
       });
-      console.log("API response:", res.data);
       setData((prev) =>
         reset ? res.data.results : [...prev, ...res.data.results]
       );
@@ -53,12 +52,12 @@ const ExplorePage = () => {
   }, [pageNo, totalPageNo]);
 
   return (
-    <div className="p-16">
+    <div className="py-16">
       <div className="container mx-auto">
         <h3 className="capitalize text-lg text-semibold">
           Popular {params.explore} show
         </h3>
-        <div className="grid grid-cols-[repeat(auto-fit,230px)] gap-4">
+        <div className="grid grid-cols-[repeat(auto-fit,230px)] gap-6 justify-center lg:justify-start">
           {data.map((exploreData, index) => (
             <Card
               key={exploreData.id}
