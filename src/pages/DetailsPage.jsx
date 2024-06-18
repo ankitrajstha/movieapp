@@ -7,7 +7,6 @@ import { Divider } from "../components/Divider";
 const DetailsPage = () => {
   const params = useParams();
   const imageURL = useSelector((state) => state.movieoData.imageURL);
-
   const { data } = useFetchDetails(`/${params?.explore}/${params.id}`);
   const { data: castData } = useFetchDetails(
     `/${params?.explore}/${params?.id}/credits`
@@ -23,7 +22,7 @@ const DetailsPage = () => {
     ?.join(", ");
   return (
     <div>
-      <div className="w-full h-[280px] relative hidden lg:block">
+      <div className="w-full h-[480px] relative hidden lg:block">
         <div className="w-full h-full">
           <img
             src={imageURL + data?.backdrop_path}
