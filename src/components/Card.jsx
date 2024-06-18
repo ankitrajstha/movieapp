@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 const Card = ({ data, trending, index }) => {
   const imageURL = useSelector((state) => state.movieoData.imageURL);
   return (
-    <div className="w-full max-w-[230px] h-80 rounded relative overflow-hidden cursor-pointer">
+    <div className="w-full min-w-[230px] max-w-[230px] h-80 rounded relative overflow-hidden cursor-pointer">
       <img
         src={imageURL + data?.poster_path}
         alt="Show poster"
@@ -23,8 +23,9 @@ const Card = ({ data, trending, index }) => {
         <h2 className="text-ellipsis line-clamp-1 text-lg font-semibold">
           {data?.title || data?.name}
         </h2>
-        <div>
+        <div className="text-sm text-neutral-400 flex justify-between">
           <p>{data.release_date || data.first_air_date}</p>
+          <p>Rating: {Number(data.vote_average).toFixed(1)}</p>
         </div>
       </div>
     </div>
