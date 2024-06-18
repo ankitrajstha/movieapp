@@ -1,10 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Card = ({ data, trending, index }) => {
   const imageURL = useSelector((state) => state.movieoData.imageURL);
   return (
-    <div className="w-full min-w-[230px] max-w-[230px] h-80 rounded relative overflow-hidden cursor-pointer">
+    <Link
+      to={"/" + data.media_type + "/" + data.id}
+      className="w-full min-w-[230px] max-w-[230px] h-80 rounded relative overflow-hidden cursor-pointer"
+    >
       <img
         src={imageURL + data?.poster_path}
         alt="Show poster"
@@ -28,7 +32,7 @@ const Card = ({ data, trending, index }) => {
           <p>Rating: {Number(data.vote_average).toFixed(1)}</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

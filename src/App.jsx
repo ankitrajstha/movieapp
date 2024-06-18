@@ -14,7 +14,6 @@ export default function App() {
     try {
       const res = await axios.get("/trending/all/week");
       dispatch(setBannerData(res.data.results));
-      console.log(res);
     } catch (error) {
       console.log(error);
     }
