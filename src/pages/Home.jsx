@@ -1,26 +1,15 @@
-import React, { useEffect, useState } from "react";
 import BannerHome from "../components/BannerHome";
 import { useSelector } from "react-redux";
 import HorizontalScrollCard from "../components/HorizontalScrollCard";
-import axios from "axios";
+import useFetch from "../hooks/useFetch";
 
 const Home = () => {
   const trendingMoviesData = useSelector(
     (state) => state.movieoData.bannerData
   );
-  const [nowPlayingData, setNowPlayingData] = useState([]);
+  const { data: nowPlayingData } = useFetch("/movie/now_playing");
+  const { data: topRatedData } = useFetch("/movie/top_rated");
 
-  const fetchNowPlayingData = async () => {
-    try {
-      const res = await axios.get("/movie/now_playing");
-      setNowPlayingData(res.data.results);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    fetchNowPlayingData();
-  }, []);
   return (
     <div>
       <BannerHome />
@@ -30,6 +19,7 @@ const Home = () => {
         trending={true}
       />
       <HorizontalScrollCard data={nowPlayingData} heading={"Now Showing"} />
+      <HorizontalScrollCard data={topRatedData} heading={"Top Rated"} />
     </div>
   );
 };
