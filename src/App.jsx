@@ -17,7 +17,7 @@ export default function App() {
     } catch (error) {
       console.log(error);
     }
-  }; 
+  };
   const fetchConfiguration = async () => {
     try {
       const res = await axios.get("/configuration");

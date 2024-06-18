@@ -7,7 +7,7 @@ const useFetch = (endpoint) => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("/movie/now_playing");
+      const res = await axios.get(endpoint);
       setLoading(false);
       setData(res.data.results);
     } catch (error) {
