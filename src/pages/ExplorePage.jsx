@@ -7,38 +7,51 @@ const ExplorePage = () => {
   const params = useParams();
   const [pageNo, setPageNo] = useState(1);
   const [data, setData] = useState([]);
-  const [totoalPageNo, setTotalPageNo] = useState(0);
-  console.log("params", params.explore);
-  const fetchData = async () => {
+  const [totalPageNo, setTotalPageNo] = useState(0);
+
+  const fetchData = async (reset = false) => {
     try {
       const res = await axios.get(`/discover/${params.explore}`, {
         params: {
           page: pageNo,
         },
       });
-      setData((prev) => {
-        return [...prev, ...res.data.results];
-      });
+      console.log("API response:", res.data);
+      setData((prev) =>
+        reset ? res.data.results : [...prev, ...res.data.results]
+      );
       setTotalPageNo(res.data.total_pages);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
+
   const handleScroll = () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    if (
+      window.innerHeight + window.scrollY >= document.body.offsetHeight &&
+      pageNo < totalPageNo
+    ) {
       setPageNo((prev) => prev + 1);
     }
   };
+
   useEffect(() => {
     fetchData();
   }, [pageNo]);
+
+  useEffect(() => {
+    setPageNo(1);
+    setData([]);
+    fetchData(true);
+  }, [params.explore]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [pageNo, totalPageNo]);
+
   return (
     <div className="p-16">
       <div className="container mx-auto">
@@ -47,7 +60,11 @@ const ExplorePage = () => {
         </h3>
         <div className="grid grid-cols-[repeat(auto-fit,230px)] gap-4">
           {data.map((exploreData, index) => (
-            <Card key={index} data={exploreData} media_type={params.explore} />
+            <Card
+              key={exploreData.id}
+              data={exploreData}
+              media_type={params.explore}
+            />
           ))}
         </div>
       </div>
