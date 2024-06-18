@@ -2,11 +2,12 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const Card = ({ data, trending, index }) => {
+const Card = ({ data, trending, index, media_type }) => {
   const imageURL = useSelector((state) => state.movieoData.imageURL);
+  const mediaType = data.media_type ?? media_type;
   return (
     <Link
-      to={"/" + data.media_type + "/" + data.id}
+      to={"/" + mediaType + "/" + data.id}
       className="w-full min-w-[230px] max-w-[230px] h-80 rounded relative overflow-hidden block cursor-pointer"
     >
       <img

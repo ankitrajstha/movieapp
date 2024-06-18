@@ -45,9 +45,9 @@ const ExplorePage = () => {
         <h3 className="capitalize text-lg text-semibold">
           Popular {params.explore} show
         </h3>
-        <div className="grid grid-cols-[repeat">
+        <div className="grid grid-cols-[repeat(auto-fit,230px)] gap-4">
           {data.map((exploreData, index) => (
-            <Card key={index} data={exploreData} />
+            <Card key={index} data={exploreData} media_type={params.explore} />
           ))}
         </div>
       </div>
