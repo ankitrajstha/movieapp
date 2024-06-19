@@ -46,12 +46,12 @@ const SearchPage = () => {
   }, []);
   return (
     <div className="py-16">
-      <div className="lg:hidden my-2 mx-1 sticky top-[70px] z-30">
+      <div className="lg:hidden my-2 mx-1 sticky top-[70px] z-30 text-black">
         <input
           type="text"
           placeholder="Search..."
           onChange={(e) => navigate(`/search?q=${e.target.value}`)}
-          className="px-4 py-1 text-lg w-full bg-white rounded-full text-neutral-100"
+          className="px-4 py-1 text-lg w-full bg-white rounded-full text-neutral-900"
         />
       </div>
       <div className="container mx-auto">
