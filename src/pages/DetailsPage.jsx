@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router";
 import useFetchDetails from "../hooks/useFetchDetail";
 import { useSelector } from "react-redux";
 import { Divider } from "../components/Divider";
+import VideoPlay from "../components/VideoPlay";
 
 const DetailsPage = () => {
   const params = useParams();
@@ -11,6 +12,8 @@ const DetailsPage = () => {
   const { data: castData } = useFetchDetails(
     `/${params?.explore}/${params?.id}/credits`
   );
+  const [playVideo, setPlayVideo] = useState(false);
+  const [playVideoId, setPlayVideoId] = useState("");
 
   const duration = data?.runtime
     ? (Number(data.runtime) / 60).toFixed(1).split(".")
@@ -20,6 +23,11 @@ const DetailsPage = () => {
     ?.filter((el) => el?.job === "Writer")
     ?.map((el) => el?.name)
     ?.join(", ");
+
+  const handlePlayVideo = (data) => {
+    setPlayVideo(data.id);
+    setPlayVideo(true);
+  };
   return (
     <div>
       <div className="w-full h-[480px] relative hidden lg:block">
@@ -40,7 +48,10 @@ const DetailsPage = () => {
             className="h-80 w-60 object-cover rounded"
             alt="movie_poster"
           />
-          <button className="mt-3 w-full py-2 text-center bg-white text-black rounded font-bold text-lg hover:bg-gradient-to-l from-red-500 to-orange-500 hover:text-white hover:scale-105 transition-all">
+          <button
+            className="mt-3 w-full py-2 text-center bg-white text-black rounded font-bold text-lg hover:bg-gradient-to-l from-red-500 to-orange-500 hover:text-white hover:scale-105 transition-all"
+            onClick={() => handlePlayVideo(data)}
+          >
             Play Now
           </button>
         </div>
@@ -119,6 +130,12 @@ const DetailsPage = () => {
           </div>
         </div>
       </div>
+      {playVideo && (
+        <VideoPlay
+          playVideoId={playVideoId}
+          close={() => setPlayVideo(false)}
+        />
+      )}
     </div>
   );
 };
