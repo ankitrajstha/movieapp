@@ -40,6 +40,9 @@ const DetailsPage = () => {
             className="h-80 w-60 object-cover rounded"
             alt="movie_poster"
           />
+          <button className="mt-3 w-full py-2 text-center bg-white text-black rounded font-bold text-lg hover:bg-gradient-to-l from-red-500 to-orange-500 hover:text-white hover:scale-105 transition-all">
+            Play Now
+          </button>
         </div>
 
         <div>
